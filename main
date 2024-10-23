@@ -1,0 +1,30 @@
+public class Main {
+    public static void main(String[] args) {
+        Empresa empresa = new Empresa();
+
+        // Agregar empleados
+        empresa.agregar(10001, "Juan", 30, 3000.0);
+        empresa.agregar(10002, "Ana", 25, 3500.0);
+        empresa.agregar(10003, "Luis", 40, 2000.0);
+        empresa.agregar(10004, "María", 35, 4000.0);
+        empresa.agregar(10005, "Pedro", 28, 3200.0);
+
+        // Calcular y mostrar el promedio de salarios
+        double promedio = empresa.promedio();
+        System.out.println("Promedio de salarios: " + promedio);
+
+        // Mostrar nombres de empleados con salario mayor al promedio
+        System.out.println("Empleados con salario mayor al promedio:" + empresa.nombres());
+
+        // Mostrar el salario del empleado más viejo
+        double salarioMasAlto = empresa.mas();
+        System.out.println("Salario del empleado más viejo: " + salarioMasAlto);
+
+        // Mostrar la suma de salarios por cargos
+        double[] salariosPorCargos = empresa.cargos();
+        System.out.println("Suma de salarios por cargos:");
+        for (int i = 0; i < salariosPorCargos.length; i++) {
+            System.out.printf("Cargo %d: %.2f%n", i + 1, salariosPorCargos[i]);
+        }
+    }
+}
