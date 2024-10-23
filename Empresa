@@ -1,0 +1,78 @@
+class Empresa {
+
+    private Elemento p = null;
+
+    private class Elemento {
+        private long codigo;
+        private String nombre;
+        private int edad;
+        private double salario;
+        private Elemento siguiente;
+
+        Elemento() { }
+    }
+
+    public Empresa() { }
+
+    public void agregar(long cod, String nom, int ed, double sal) {
+        Elemento q = new Elemento();
+        q.codigo = cod;
+        q.nombre = nom;
+        q.edad = ed;
+        q.salario = sal;
+        q.siguiente = p;
+        p = q;
+    }
+
+    public double promedio() {
+        double prom = 0;
+        int c = 0;
+        Elemento q = p;
+        while (q != null) {
+            c++;
+            prom += q.salario;
+            q = q.siguiente;
+        }
+        return c == 0 ? 0 : prom / c; // Evitar división por cero
+    }
+
+    public String nombres() {
+        StringBuilder s = new StringBuilder();
+        Elemento q = p;
+        double avg = promedio(); // Calcular promedio una vez
+        while (q != null) {
+            if (q.salario > avg) {
+                s.append("\n").append(q.nombre);
+            }
+            q = q.siguiente;
+        }
+        return s.toString();
+    }
+
+    public double mas() {
+        double m = 0;
+        int e = 0;
+        Elemento q = p;
+        while (q != null) {
+            if (q.edad > e) {
+                m = q.salario;
+                e = q.edad;
+            }
+            q = q.siguiente;
+        }
+        return m;
+    }
+
+    public double[] cargos() {
+        double[] c = new double[10];
+        Elemento q = p;
+        while (q != null) {
+            int cod = (int) ((q.codigo / 10000) % 100);
+            if (cod >= 1 && cod <= 10) { // Asegurar que el índice esté dentro de los límites
+                c[cod - 1] += q.salario;
+            }
+            q = q.siguiente;
+        }
+        return c;
+    }
+}
